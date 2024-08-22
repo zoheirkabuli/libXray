@@ -33,9 +33,8 @@ jobs:
       - name: Build Android
         run: |
           python3 build/main.py android
-          cd build
           ls
       - uses: actions/upload-artifact@v4
         with:
           name: libXray.aar
-          path: ./build/libXray.aar
+          path: ./libXray.aar
