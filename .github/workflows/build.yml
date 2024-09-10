@@ -66,8 +66,7 @@ jobs:
 
       - name: Install iOS and tvOS Simulator Runtimes
         run: |
-          xcversion simulators --install="iOS 17.5"
-          xcversion simulators --install="tvOS 17.6"
+          xcodes runtimes install 'iOS 16.0'
 
       - name: Install gomobile
         run: |
