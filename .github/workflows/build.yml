@@ -38,60 +38,60 @@ jobs:
         with:
           name: libXray.aar
           path: ./libXray.aar
-  build-ios:
-    name: Build IOS and TVos package
-    runs-on: macos-latest
-    steps:
-      - name: Check Out Repository
-        uses: actions/checkout@v4
+  # build-ios:
+  #   name: Build IOS and TVos package
+  #   runs-on: macos-latest
+  #   steps:
+  #     - name: Check Out Repository
+  #       uses: actions/checkout@v4
 
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: "1.23"
-          check-latest: true
+  #     - name: Set up Go
+  #       uses: actions/setup-go@v5
+  #       with:
+  #         go-version: "1.23"
+  #         check-latest: true
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v5
+  #       with:
+  #         python-version: "3.x"
 
-      - name: Install xcversion
-        run: |
-          gem install xcode-install
+  #     - name: Install xcversion
+  #       run: |
+  #         gem install xcode-install
 
-      - name: Install Xcode Command Line Tools
-        run: |
-          xcode-select --install || true
+  #     - name: Install Xcode Command Line Tools
+  #       run: |
+  #         xcode-select --install || true
 
-      - name: Install iOS and tvOS Simulator Runtimes
-        run: |
-          xcodes runtimes install 'iOS 17.5'
+  #     - name: Install iOS and tvOS Simulator Runtimes
+  #       run: |
+  #         xcodes runtimes install 'iOS 17.5'
 
-      - name: Install gomobile
-        run: |
-          go install golang.org/x/mobile/cmd/gomobile@latest
-          gomobile init
+  #     - name: Install gomobile
+  #       run: |
+  #         go install golang.org/x/mobile/cmd/gomobile@latest
+  #         gomobile init
 
-      - name: Compile for Apple devices
-        run: python3 build/main.py apple go
+  #     - name: Compile for Apple devices
+  #       run: python3 build/main.py apple go
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: apple-binaries
-          path: |
-            *.xcframework
-            *.h
-          if-no-files-found: error
+  #     - name: Upload artifacts
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: apple-binaries
+  #         path: |
+  #           *.xcframework
+  #           *.h
+  #         if-no-files-found: error
 
-      - name: Generate bridging header
-        run: |
-          echo "// Bridging Header for Swift" > bridging-header.h
-          echo "#import \"your_generated_header.h\"" >> bridging-header.h
+  #     - name: Generate bridging header
+  #       run: |
+  #         echo "// Bridging Header for Swift" > bridging-header.h
+  #         echo "#import \"your_generated_header.h\"" >> bridging-header.h
 
-      - name: Upload bridging header
-        uses: actions/upload-artifact@v3
-        with:
-          name: bridging-header
-          path: bridging-header.h
+  #     - name: Upload bridging header
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: bridging-header
+  #         path: bridging-header.h
