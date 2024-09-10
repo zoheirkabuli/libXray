@@ -70,25 +70,25 @@ jobs:
           go install golang.org/x/mobile/cmd/gomobile@latest
           gomobile init
 
-      # - name: Compile for Apple devices
-      #   run: python3 build/main.py apple go
+      - name: Compile for Apple devices
+        run: python3 build/main.py apple go
 
-      # - name: Upload artifacts
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: apple-binaries
-      #     path: |
-      #       *.xcframework
-      #       *.h
-      #     if-no-files-found: error
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: apple-binaries
+          path: |
+            *.xcframework
+            *.h
+          if-no-files-found: error
 
-      # - name: Generate bridging header
-      #   run: |
-      #     echo "// Bridging Header for Swift" > bridging-header.h
-      #     echo "#import \"your_generated_header.h\"" >> bridging-header.h
+      - name: Generate bridging header
+        run: |
+          echo "// Bridging Header for Swift" > bridging-header.h
+          echo "#import \"your_generated_header.h\"" >> bridging-header.h
 
-      # - name: Upload bridging header
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: bridging-header
-      #     path: bridging-header.h
+      - name: Upload bridging header
+        uses: actions/upload-artifact@v3
+        with:
+          name: bridging-header
+          path: bridging-header.h
