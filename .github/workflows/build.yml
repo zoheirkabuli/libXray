@@ -56,14 +56,18 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Install xcversion
+        run: |
+          gem install xcode-install
+
       - name: Install Xcode Command Line Tools
         run: |
           xcode-select --install || true
 
       - name: Install iOS and tvOS Simulator Runtimes
         run: |
-          xcversion simulators --install="iOS Simulator Runtime"
-          xcversion simulators --install="tvOS Simulator Runtime"
+          xcversion simulators --install="iOS 17.5"
+          xcversion simulators --install="tvOS 17.6"
 
       - name: Install gomobile
         run: |
